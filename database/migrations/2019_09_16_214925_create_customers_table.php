@@ -1,0 +1,53 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateCustomersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('customers', function (Blueprint $table) {
+            //Create automated increment column for customer id (Primary Key)
+            $table->increments('id');
+
+            //Create string column for customer name
+            $table->string('name');
+
+            //Create string column for customer photo
+            $table->string('photo');
+            
+            //Create integer column for address
+            $table->string('address');
+        
+            //Create integer column for township_id (Foreign Key)
+            $table->unsignedInteger('township_id');
+            //Assigned as foreign key on id column in Townships table.
+            $table->foreign("township_id")->references("id")->on("townships")->onDelete("Cascade");
+
+            //Create integer column for user_id (Foreign Key)
+            $table->unsignedInteger('user_id');
+            //Assigned as foreign key on id column in Users table.
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("Cascade");
+
+            //Create timestamps for data updating record
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('customers');
+    }
+}

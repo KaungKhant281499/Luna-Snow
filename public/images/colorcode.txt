@@ -1,0 +1,5 @@
+Text Blue: 2c74ae
+
+Pale Blue: a5d7ff
+
+Purple: 9c27b0
