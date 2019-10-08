@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Auction;
+use Auth;
 use Illuminate\Http\Request;
 
 class AuctionController extends Controller
@@ -27,7 +28,7 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        //
+        return view("auctions.create");
     }
 
     /**
@@ -38,7 +39,41 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auction = new Auction();
+        if($request->hasFile('photo')){
+            $auction->photo = $request->photo->store("auction_image","public");
+        }else{
+            $auction->photo = "images/logojp.jpg";
+        }
+
+        $auction->title = $request->title;
+        $auction->description = $request->description;
+        
+        if($request->fixbid==null){
+            $auction->fixbid = 0;
+        }else{
+            $auction->fixbid = $request->fixbid;
+        }
+
+        if($request->finalsale==null){
+            $auction->finalsale = 0;
+        }else{
+            $auction->finalsale = $request->finalsale;
+        }
+        
+        $auction->condition = $request->condition;
+        $auction->enddate = $request->enddate;
+        $auction->endtime = $request->endtime;
+        
+        $auction->bids = '0';
+        $auction->currentprice = '0';
+        $auction->soldout = 'No';        
+
+        $auction->user_id = Auth::user()->id;
+        
+        $auction->save();
+
+        return redirect()-> route("shops.index");
     }
 
     /**
@@ -49,7 +84,9 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        //
+        return view("auctions.show",[
+            "auction" => $auction,
+        ]);
     }
 
     /**

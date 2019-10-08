@@ -14,8 +14,12 @@ class CreateAuctionsTable extends Migration
     public function up()
     {
         Schema::create('auctions', function (Blueprint $table) {
+            //Post Info
             //Create automated increment column for auction id (Primary Key)
             $table->increments('id');
+
+            //Create string column for photo
+            $table->string('photo');
 
             //Create string column for auction title
             $table->string('title');
@@ -26,26 +30,31 @@ class CreateAuctionsTable extends Migration
             //Create string column for condition
             $table->string('condition');
 
-            //Create string column for total bids
-            $table->bigInteger('bids');
-
             //Create string column for enddate
             $table->string('enddate');
 
             //Create string column for endtime
             $table->string('endtime');
 
-            //Create string column for soldout
-            $table->string('soldout');
-            
-            //Create integer column for current price
-            $table->bigInteger('currentprice');
-        
             //Create string column for fix bidding for each
             $table->bigInteger('fixbid');
 
             //Create string column for final sale
             $table->bigInteger('finalsale');
+
+            //Auction Info
+            //Create string column for total bids
+            $table->bigInteger('bids');
+
+            //Create string column for soldout
+            $table->string('soldout');
+            
+            //Create string column for soldout
+            $table->string('delivered')->nullable();
+
+            //Create integer column for current price
+            $table->bigInteger('currentprice');
+        
 
             //Seller
             //Create integer column for user_id (Foreign Key)
@@ -57,7 +66,7 @@ class CreateAuctionsTable extends Migration
             //Create integer column for customer_id (Foreign Key)
             $table->unsignedInteger('customer_id')->nullable();
             //Assigned as foreign key on id column in Customers table.
-            $table->foreign("customer_id")->references("id")->on("customers")->onDelete("Cascade");
+            $table->foreign("customer_id")->references("id")->on("users")->onDelete("Cascade");
 
             //Create timestamps for data updating record
             $table->timestamps();

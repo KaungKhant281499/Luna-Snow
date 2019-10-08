@@ -1,5 +1,6 @@
+@hasanyrole('admin|shop|customer')
 <footer class="footer">
-    <div class="container">
+    <!-- <div class="container">
         <nav class="float-left">
         <ul>
             <li>
@@ -29,5 +30,6 @@
         <script>
             document.write(new Date().getFullYear())
         </script>, copyright by LUNA SNOW Co Ltd.
-    </div>
+    </div> -->
 </footer>
+@endhasanyrole

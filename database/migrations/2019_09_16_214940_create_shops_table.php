@@ -24,12 +24,17 @@ class CreateShopsTable extends Migration
             $table->string('photo');
             
             //Create integer column for address
-            $table->bigInteger('address');
+            $table->string('address');
         
             //Create integer column for township_id (Foreign Key)
             $table->unsignedInteger('township_id');
             //Assigned as foreign key on id column in Townships table.
             $table->foreign("township_id")->references("id")->on("townships")->onDelete("Cascade");
+
+            //Create integer column for user_id (Foreign Key)
+            $table->unsignedInteger('user_id');
+            //Assigned as foreign key on id column in Users table.
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("Cascade");
 
             //Create timestamps for data updating record
             $table->timestamps();

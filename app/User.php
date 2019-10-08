@@ -2,10 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -38,14 +38,4 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    //One User To Many Banks 1-1 with Bank
-    public function banks(){
-        return $this -> hasMany("App\Bank");
-    }
-
-    //One User To Many Auctions 1-M with Auction
-    public function auctions(){
-        return $this -> hasMany("App\Auction");
-    }
 }

@@ -6,6 +6,7 @@ use App\Customer;
 use App\District;
 use App\City;
 use App\Township;
+use App\Auction;
 use App\Bank;
 use Auth;
 use Illuminate\Http\Request;
@@ -19,7 +20,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $auctions = Auction::all();
+        return view("customers.index",[
+            "auctions" => $auctions,
+        ]);
     }
 
     /**
@@ -77,7 +81,7 @@ class CustomerController extends Controller
         $bank->type = $request->type;
         $bank->save();
 
-        return redirect()-> route("home")->with("notification","Congratulations, Your Account Registration Is Finished");
+        return redirect()-> route("auctions")->with("notification","Congratulations, Your Account Registration Is Finished");
     }
 
     /**

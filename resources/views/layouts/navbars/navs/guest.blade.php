@@ -22,8 +22,20 @@
         </li>
 
         <li class="nav-item">
+          <a href="{{ route('about') }}" class="nav-link">
+            <i class="material-icons">person</i> {{ __('About Us') }}
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a href="{{ route('auctions') }}" class="nav-link">
             <i class="material-icons">store</i> {{ __('Auctions') }}
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{{ route('contact') }}" class="nav-link">
+            <i class="material-icons"> phone </i> {{ __('Contact Us') }}
           </a>
         </li>
 
